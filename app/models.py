@@ -15,7 +15,7 @@ class User(UserMixin,db.Model):
     pass_secure = db.Column(db.String(255))
     pitch = db.relationship('Pitch', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
-    upvotes = db.relationship('Upvote', backref = 'user', lazy = 'dynamic')
+    # upvotes = db.relationship('Upvote', backref = 'user', lazy = 'dynamic')
     downvotes = db.relationship('Downvote', backref = 'user', lazy = 'dynamic')
 
     @property
@@ -48,8 +48,8 @@ class Pitch(db.Model):
     title = db.Column(db.String())
     category = db.Column(db.String(255), nullable=False)
     comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
-    upvotes = db.Column(db.Integer())
-    downvotes = db.Column(db.Integer())
+    # upvotes = db.Column(db.Integer())
+    # downvotes = db.Column(db.Integer())
 
     
     @classmethod
