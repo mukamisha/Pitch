@@ -25,7 +25,7 @@ def index():
     interviewpitch = Pitch.query.filter_by(category = "interviewpitch")
     promotionpitch = Pitch.query.filter_by(category = "promotionpitch")
     productpitch = Pitch.query.filter_by(category = "productpitch")
-    # upvotes = Upvote.get_all_upvotes(pitch_id=Pitch.id)
+    upvotes = Upvote.get_all_upvotes(pitch_id=Pitch.id)
     
 
     return render_template('home.html', title = title, pitch = pitch, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
@@ -68,7 +68,6 @@ def new_comment(pitch_id):
 
     all_comments = Comment.query.filter_by(pitch_id = pitch_id).all()
     return render_template('comment.html', form = form, comment = all_comments, pitch = pitch )
-
 
 @main.route('/pitch/upvote/<int:pitch_id>/upvote', methods = ['GET', 'POST'])
 @login_required
@@ -147,11 +146,4 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
 
-# @main.route('/review/<int:id>')
-# def single_review(id):
-#     review=Review.query.get(id)
-#     if review is None:
-#         abort(404)
-#     format_review = markdown2.markdown(review.movie_review,extras=["code-friendly", "fenced-code-blocks"])
-#     return render_template('review.html',review = review,format_review=format_review)
 
