@@ -48,8 +48,8 @@ class Pitch(db.Model):
     title = db.Column(db.String())
     category = db.Column(db.String(255), nullable=False)
     comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
-    # upvotes = db.Column(db.Integer())
-    # downvotes = db.Column(db.Integer())
+    upvotes = db.Column(db.Integer())
+    downvotes = db.Column(db.Integer())
 
     
     @classmethod
@@ -69,7 +69,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
-    comment = db.Column(db.Text)
+    description = db.Column(db.Text)
 
     
     def __repr__(self):
