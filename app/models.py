@@ -15,7 +15,7 @@ class User(UserMixin,db.Model):
     pass_secure = db.Column(db.String(255))
     pitch = db.relationship('Pitch', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
-    # upvotes = db.relationship('Upvote', backref = 'user', lazy = 'dynamic')
+    upvotes = db.relationship('Upvote', backref = 'user', lazy = 'dynamic')
     downvotes = db.relationship('Downvote', backref = 'user', lazy = 'dynamic')
 
     @property
@@ -77,22 +77,22 @@ class Comment(db.Model):
 
 
 
-# class Upvote(db.Model):
-#     __tablename__ = 'upvotes'
+class Upvote(db.Model):
+    __tablename__ = 'upvotes'
 
-#     id = db.Column(db.Integer,primary_key=True)
-#     upvote = db.Column(db.Integer,default=1)
-#     pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
-#     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    id = db.Column(db.Integer,primary_key=True)
+    upvote = db.Column(db.Integer,default=1)
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
-#     def save_upvotes(self):
-#         db.session.add(self)
-#         db.session.commit()
+    def save_upvotes(self):
+        db.session.add(self)
+        db.session.commit()
 
 
-#     def add_upvotes(cls,id):
-#         upvote_pitch = Upvote(user = current_user, pitch_id=id)
-#         upvote_pitch.save_upvotes()
+    def add_upvotes(cls,id):
+        upvote_pitch = Upvote(user = current_user, pitch_id=id)
+        upvote_pitch.save_upvotes()
 
     
 #     @classmethod
