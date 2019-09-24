@@ -13,8 +13,8 @@
 				</blockquote>
 				
 				<a href="{{url_for('main.new_comment',pitch_id = category.id)}}" class="btn btn-primary disabled"> Add a comment</a>
-				<a href="{{url_for('main.upvote',pitch_id = category.id)}}" class= "btn btn-primary btn-sm"><i></i>Upvote <span>{{category.upvotes}}</span></a>
-				<a href="{{url_for('main.downvote',pitch_id = category.id)}}" class= "btn btn-danger btn-sm"><i class="far fa-thumbs-up"></i>Downvote <span>{{category.downvotes}}</span></a>
+				<a href="{{url_for('main.upvote',pitch_id = category.id)}}" class= "btn btn-primary disabled"><i></i>Upvote <span>{{category.upvotes}}</span></a>
+				<a href="{{url_for('main.downvote',pitch_id = category.id)}}" class= "btn btn-primary disabled"><i class="far fa-thumbs-up"></i>Downvote <span>{{category.downvotes}}</span></a>
 			</div>
 		</div>
 
@@ -39,7 +39,7 @@
 			{% endfor %}
 			{% else %}
 
-			<h3>no comments yet !</h3>
+			<h3>This post does  not does not have any comments yet !</h3>
 			{%endif%}
 
 	</ul>
