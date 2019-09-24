@@ -2,7 +2,7 @@ from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager
-from datetime import datetime
+# from datetime import datetime
 
 
 
@@ -48,8 +48,8 @@ class Pitch(db.Model):
     title = db.Column(db.String())
     category = db.Column(db.String(255), nullable=False)
     comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
-    upvotes = db.Column(db.Integer())
-    downvotes = db.Column(db.Integer())
+    upvotes = db.relationship('Upvote', backref = 'pitch', lazy = 'dynamic')
+    downvotes = db.relationship('Downvote', backref = 'pitch', lazy = 'dynamic')
 
     
     @classmethod

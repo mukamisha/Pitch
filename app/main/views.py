@@ -2,7 +2,7 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 # from ..request import get_movies,get_movie,search_movie
-from .forms import PitchForm,CommentForm,UpvoteForm,Downvote
+from .forms import PitchForm,CommentForm,UpvoteForm,Downvote,UpdateProfile
 # from .. import db,photos
 from ..models import User,Pitch,Comment,Upvote,Downvote
 from flask_login import login_required,current_user
@@ -25,16 +25,18 @@ def index():
     interviewpitch = Pitch.query.filter_by(category = "interviewpitch")
     promotionpitch = Pitch.query.filter_by(category = "promotionpitch")
     productpitch = Pitch.query.filter_by(category = "productpitch")
-    # upvotes = Upvote.get_all_upvotes(pitch_id=Pitch.id)
+
+   
     
 
     return render_template('home.html', title = title, pitch = pitch, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
+    
 
 @main.route('/pitches/new/', methods = ['GET','POST'])
 @login_required
 def new_pitch():
     form = PitchForm()
-    my_upvotes = Upvote.query.filter_by(pitch_id = Pitch.id)
+ 
     if form.validate_on_submit():
         description = form.description.data
         title = form.title.data
@@ -44,8 +46,6 @@ def new_pitch():
         new_pitch = Pitch(user_id =current_user._get_current_object().id, title = title,description=description,category=category)
         db.session.add(new_pitch)
         db.session.commit()
-        
-        
         return redirect(url_for('main.index'))
     return render_template('pitch.html',form=form)
 
@@ -99,13 +99,6 @@ def downvote(pitch_id):
     new_downvote = Downvote(pitch_id=pitch_id, user = current_user)
     new_downvote.save_downvotes()
     return redirect(url_for('main.index'))
-
-
-
-
-
-
-
 
 
 @main.route('/user/<uname>')
