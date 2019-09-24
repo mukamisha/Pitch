@@ -62,7 +62,6 @@ class Pitch(db.Model):
 
 
 
-
 class Comment(db.Model):
     __tablename__='comments'
     
@@ -74,6 +73,7 @@ class Comment(db.Model):
     
     def __repr__(self):
         return f"Comment : id: {self.id} comment: {self.description}"
+
 
 
 

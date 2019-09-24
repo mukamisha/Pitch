@@ -25,7 +25,7 @@ def index():
     interviewpitch = Pitch.query.filter_by(category = "interviewpitch")
     promotionpitch = Pitch.query.filter_by(category = "promotionpitch")
     productpitch = Pitch.query.filter_by(category = "productpitch")
-    upvotes = Upvote.get_all_upvotes(pitch_id=Pitch.id)
+    # upvotes = Upvote.get_all_upvotes(pitch_id=Pitch.id)
     
 
     return render_template('home.html', title = title, pitch = pitch, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
@@ -57,9 +57,9 @@ def new_comment(pitch_id):
     form = CommentForm()
     pitch=Pitch.query.get(pitch_id)
     if form.validate_on_submit():
-        comment = form.comment.data
+        description = form.description.data
 
-        new_comment = Comment(comment = description, user_id = current_user._get_current_object().id, pitch_id = pitch_id)
+        new_comment = Comment(description = description, user_id = current_user._get_current_object().id, pitch_id = pitch_id)
         db.session.add(new_comment)
         db.session.commit()
 
