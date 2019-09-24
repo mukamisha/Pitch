@@ -17,6 +17,10 @@ class User(UserMixin,db.Model):
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
     upvotes = db.relationship('Upvote', backref = 'user', lazy = 'dynamic')
     downvotes = db.relationship('Downvote', backref = 'user', lazy = 'dynamic')
+    photos = db.relationship('PhotoProfile', backref = 'user', lazy = 'dynamic')
+    bio = db.column(db.String(225))
+    profile_pic_path = db.column(db.String(225))
+
 
     @property
     def password(self):
@@ -140,3 +144,10 @@ class Downvote(db.Model):
 
     def __repr__(self):
         return f'{self.user_id}:{self.pitch_id}'
+
+
+class PhotoProfile(db.Model):
+   __tablename__ = 'profile_photos'
+   id = db.Column(db.Integer,primary_key = True)
+   pic_path = db.Column(db.String())
+   user_id = db.Column(db.Integer,db.ForeignKey("users.id"))

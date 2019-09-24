@@ -4,11 +4,20 @@
 {% include 'navbar.html'%}
 {% endblock %}
 
+  
   {% block content %}
+
     <div class="container">
-      <div class="jumbotron" style="height:300px;width:1100px">
-      <h3 style="color: black;text-align: center"> Pitches'  Categories</h3>
+     
+        <div class="jumbotron" style="height:200px;width:1120px;font-family: 'Kaushan Script', cursive;font-size:5px">
+          <p>In life, you only have 60 seconds to impress someone. 1 minute can make or break you.<br>
+          one minute can kill you or heal you. let's use our one minute to tell something to the world.<br>
+        Here we have a pitch app where you will be posting a pitch for only one minute.please post something constructive.</p>
+        </div>
+      </div>
+      <h3 style="color: black;text-align: center"> Here are Pitches Categories, you can choose one you might like!</h3>
       <br>
+      <div style="width:600px;height:100px;margin-left:400px">
       <ul class="nav justify-content-center" role="tablist">
         <li class="nav-item">
           <a class="navbar-brand" data-toggle="tab" href="#product" style="background-color:black">Product</a>
@@ -23,7 +32,7 @@
           <a class="navbar-brand" data-toggle="tab" href="#promotion" style="background-color:black">Promotion</a>
         </li>
       </ul>
-    </div>
+      </div>
       <div class="tab-content">
         <div id="product" class="container tab-pane fade"><br>
           {{ macro.display(productpitch) }}

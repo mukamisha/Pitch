@@ -3,7 +3,7 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 # from ..request import get_movies,get_movie,search_movie
 from .forms import PitchForm,CommentForm,UpvoteForm,Downvote,UpdateProfile
-# from .. import db,photos
+from .. import db,photos
 from ..models import User,Pitch,Comment,Upvote,Downvote
 from flask_login import login_required,current_user
 import markdown2
@@ -101,16 +101,13 @@ def downvote(pitch_id):
     return redirect(url_for('main.index'))
 
 
-@main.route('/user/<uname>')
 def profile(uname):
-    user = User.query.filter_by(username = uname).first()
+ user = User.query.filter_by(username = uname).first()
+ get_pitches = Pitch.query.filter_by(user_id = current_user.id).all()
+ if user is None:
+     abort(404)
+ return render_template("profile/profile.html", user = user, pitches_content = get_pitches)
 
-    if user is None:
-        abort(404)
-
-    return render_template("profile/profile.html", user = user)
-
-@main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()

@@ -1,14 +1,14 @@
-<!-- {% extends 'base.html'%}
+{% extends 'base.html'%}
 
 {% block content %}
 <div class="container">
 <div class="row">
-<! displaying  Username-->
-  <!-- <div class="col-md-4">
-    <h3> {{user.username| capitalize}} </h3>  -->
+<!-- displaying  Username -->
+  <div class="col-md-4">
+    <h3> {{user.username| capitalize}} </h3>
 
-    <!--Displaying user bio-->
-    <!-- {% if user.bio %}
+    <!-- Displaying user bio -->
+     {% if user.bio %}
       <p> {{user.bio}}</p>
     {%else%}
       <p> {{user.username| capitalize}} has no bio </p>
@@ -39,5 +39,9 @@
     </div>
 
 </div>
+{% for pitch in pitches_content %}
+     <li>{{pitch.content}}</li>
+     {% endfor %}
+
 </div>
-{% endblock %} -->
+{% endblock %}
