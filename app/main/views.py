@@ -3,11 +3,11 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 # from ..request import get_movies,get_movie,search_movie
 from .forms import PitchForm,CommentForm,UpvoteForm,Downvote,UpdateProfile
-# from .. import db,photos
+from .. import db,photos
 from ..models import User,Pitch,Comment,Upvote,Downvote
 from flask_login import login_required,current_user
 import markdown2
-from .. import db 
+ 
 
 
 
@@ -25,9 +25,6 @@ def index():
     interviewpitch = Pitch.query.filter_by(category = "interviewpitch")
     promotionpitch = Pitch.query.filter_by(category = "promotionpitch")
     productpitch = Pitch.query.filter_by(category = "productpitch")
-
-   
-    
 
     return render_template('home.html', title = title, pitch = pitch, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
     
@@ -100,7 +97,8 @@ def downvote(pitch_id):
     new_downvote.save_downvotes()
     return redirect(url_for('main.index'))
 
-
+@main.route('/user/<uname>')
+@login_required
 def profile(uname):
  user = User.query.filter_by(username = uname).first()
  get_pitches = Pitch.query.filter_by(user_id = current_user.id).all()
@@ -108,6 +106,7 @@ def profile(uname):
      abort(404)
  return render_template("profile/profile.html", user = user, pitches_content = get_pitches)
 
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()
