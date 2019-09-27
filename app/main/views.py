@@ -21,12 +21,12 @@ def index():
     '''
     pitch = Pitch.query.filter_by().first()
     title = 'Home'
-    pickuplines = Pitch.query.filter_by(category="pickuplines")
-    interviewpitch = Pitch.query.filter_by(category = "interviewpitch")
-    promotionpitch = Pitch.query.filter_by(category = "promotionpitch")
-    productpitch = Pitch.query.filter_by(category = "productpitch")
+    intertainment = Pitch.query.filter_by(category="intertainment")
+    politics = Pitch.query.filter_by(category = "politics")
+    health = Pitch.query.filter_by(category = "health")
+    education = Pitch.query.filter_by(category = "education")
 
-    return render_template('home.html', title = title, pitch = pitch, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
+    return render_template('index.html', title = title, pitch = pitch, intertainment=intertainment, politics= politics, health = health, education = education)
     
 
 @main.route('/pitches/new/', methods = ['GET','POST'])
